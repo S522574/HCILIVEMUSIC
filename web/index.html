@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Live Music Concert Hall Booking</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" href="css/layout.css" type="text/css" />
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.photo_category').showFeatureText();
+    $(".thumbs a").click(function () {
+        var imgpath = $(this).attr("href");
+        var imgalt = $(this).attr("alt");
+        $("#placeholder").attr({
+            src: imgpath,<input type="date" name="dob" id="dob">
+            alt: imgalt
+        });
+        return false;
+    });
+});
+$.fn.showFeatureText = function () {
+    return this.each(function () {
+        var box = $(this);
+        var text = $('span', this);
+        text.css({
+            display: 'block',
+            position: 'absolute',
+            top: '0',
+            left: '0'
+        }).hide();
+        box.hover(function () {
+            text.slideDown("fast");
+        }, function () {
+            text.slideUp("fast");
+        });
+    });
+}
+</script>
+</head>
+<body id="top">
+<div class="wrapper col1">
+  <div id="header" class="clear">
+    <div class="fl_left">
+      <h1><a href="index.html">Live Music Concert Hall Booking</a></h1>
+      <p>Get Ready for the fun!!</p>
+    </div>
+    <div class="fl_right">
+      <!--<form action="#" method="post" id="search">
+        <fieldset>
+          <legend>Site Search</legend>
+          <input type="text" value="Search Website &hellip;" onfocus="this.value=(this.value=='Search Website &hellip;')? '' : this.value ;" />
+          <input type="image" id="go" src="images/search.gif" alt="Search" />
+        </fieldset>
+      </form>-->
+      <ul id="topnav" class="clear">
+        <li><a href="help.html">HELP</a></li>
+        <li><a href="contactus.html">CONTACT US</a></li>
+        <li><a href="map.html">MAP</a></li>
+        <li><a href="aboutus.html">ABOUT US</a></li>
+        <li class="active last"><a href="index.html">HOME</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper col2">
+  <div id="homepage" class="clear">
+    <p><img id="placeholder" src="images/concerthall.jpg" alt="" /></p>
+    <div class="fl_right">
+      <h2>LOGIN</h2> 
+        <form action="LoginVerificationServlet" method="post">
+          <fieldset>
+           <legend>Registered User:</legend>
+           <br></br>
+          <p>
+           UserName: <input type="text" name="uname" id="uname" value="" size="22" required="true" />
+          </p>
+           <br></br>
+          <p>
+           Password   : <input type="password" name="password" id="password" value="" size="22" required="true" />
+          </p>
+           <br></br>
+           <pre>
+            <input name="submit" type="submit" id="submit" value="Login" /> <u> <a href="forgotpassword.jsp">Forgot Password</a></u></pre>
+          </fieldset>
+        </form>
+      <br/>
+           <b>New User:</b> <u><a href="register.html">Register</a></u>
+           <br></br>
+           <b>Guest User</b><br></br>
+           <form action="#" method="post">
+               <table>
+                   <tr><td>Email Address:</td><td><input type="email" name="emailid" id="emailid" value="" size="20" /><br/></td></tr>
+                   <tr><td>DOB:</td><td> <input type="date" name="dob" id="dob" /></td></tr>
+               </table>
+               
+                 
+              </input>
+              
+               <pre>             <input type="submit" id="submit" value="Continue as guest user" /> </pre>             
+           </form>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper col3">
+  <div id="container" class="clear"> 
+    
+    <div id="hpage_info" class="clear">
+      <div class="fl_left">
+        <h2 class="title">ABOUT US</h2>
+        <p>The Live Music Theatre Company is a nonprofit center for the arts and culture located in the heart of downtown Maryville, Missouris. We bring together a community of musicians, actors, artists, writers, fans, and supporters who are dedicated to the simple premise that the broadest spectrum of live entertainment and cultural exchange is essential to the vitality of our society.</p>
+        
+      </div>
+      <div class="fl_right">
+        <h2 class="title">Meet The Team</h2>
+        <ul>
+          <li class="clear">
+            <div class="imgl"><img src="images/event1.png" alt="" /></div>
+            <div class="teamember">
+              <p class="name">QUEEN</p>
+              <p>Queen are a British rock band formed in London in 1970, originally consisting of Freddie Mercury, Brian May, John Deacon, and Roger Taylor. Queen's earliest works were influenced by progressive rock, hard rock and heavy metal, but the band gradually ventured into more conventional and radio-friendly works, incorporating further diverse styles into their music.</p>
+              <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+            </div>
+          </li>
+          <li class="clear last">
+            <div class="imgl"><img src="images/event2.png" alt="" /></div>
+            <div class="teamember">
+              <p class="name">The Rolling Stones</p>
+              <p>The Rolling Stones are an English rock band formed in London in 1962 who were in the vanguard of the British Invasion of bands that became popular in the US from 1964–65 and an integral part of the counterculture of the 1960s.</p>
+              <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    
+  </div>
+</div>
+<div class="wrapper">
+  <div id="footer">
+    <div class="verticaline clear">
+      <div class="box size1">
+        <h2>Keep in Touch</h2>
+        <p id="rss"><a href="#"><img src="images/rss.gif" alt="" /></a></p>
+      </div>
+      <div class="box size2">
+        <address>
+        <strong class="title">Company Name</strong><br />
+        NWMSU Live Concert Hall Booking<br />
+        Maryville<br />
+        </address>
+        <ul>
+          <li><strong class="title">Tel:</strong><br />
+            660.562.1145</li>
+          <li><strong class="title">Fax:</strong><br />
+           660.562.1146</li>
+          <li><strong class="title">Email:</strong><br />
+            <a href="#">livemusic@nwmsu.edu.in</a></li>
+        </ul>
+      </div>
+      <div class="box size3">
+        <ul>
+          <li><span>Facebook:</span> <a href="#">www.facebook.com/NwmsuLiveMusic</a></li>
+          <li><span>Twitter:</span> <a href="#">www.twitter.com/NwmsuLiveMusic</a></li>
+          <li><span>LinkedIn:</span> <a href="#">www.linkedin.com/NwmsuLiveMusic</a></li>
+        </ul>
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Newsletter Signup:</legend>
+            <pre><input type="text" id="newsletter" value="Enter Email Here&hellip;" />  <input type="image" id="subscribe" src="images/submit.gif" alt="Submit" /></pre>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

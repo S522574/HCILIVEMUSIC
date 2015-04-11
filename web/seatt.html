@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+    <head>
+        <title>Welcome to Hub Tickets Online</title>
+        <link rel="stylesheet" href="css/layout.css" type="text/css" />
+        <script type="text/javascript" src="scripts/jquery.min.js"></script>
+        <script type="text/javascript">
+            numPremSeatsPerRow = 30;
+            PremRowNames = ['A','B','C','D'];
+            numCheapSeatsPerRow = 30;
+            CheapRowNames = ['E','F','G','H','I'];
+            numRegularSeatsPerRow = 15;
+            RegularRowNames = ['J','K','L','M','N']
+            var statusPics = new Array();
+            statusPics['avail'] = new Image();
+            statusPics['mine'] = new Image();
+            statusPics['taken'] = new Image();
+            statusPics['avail'].src = 'images/seat_available.png';
+            statusPics['mine'].src = 'images/seat_selected.png';
+            statusPics['taken'].src = 'images/seat_reserved.png';
+            function createSeats(oSeatsContainer,seatsPerRow,rowNames){
+                for(i=0; i < rowNames.length; i++){
+                    var oRow = document.createElement('tr');
+                    var oCell = document.createElement('td');
+                    oCell.innerHTML = rowNames[i];
+                    oRow.appendChild(oCell);
+                    for(j=0; j < seatsPerRow; j++){
+                        oCell = document.createElement('td');
+                        var oImg = document.createElement('img');
+                        oImg.src = statusPics['avail'].src;
+                        oImg.status = 'avail';
+                        oImg.onclick=function(){
+                            this.status = (this.status == 'avail')? 'mine' : 'avail';
+                            this.src = (this.status == 'avail')? statusPics['avail'].src : statusPics['mine'].src;
+                            oTotalprice.innerHTML = '';
+                            oBtnCheckout.disabled = true;
+                        }
+                        oCell.appendChild(oImg);
+                        oRow.appendChild(oCell);
+                    }
+                    oSeatsContainer.appendChild(oRow);
+                }
+            }
+            function confirmChoices(){
+                numPremSeatsSelected = 0;
+                for(i=0; i < oPremSeats.length; i++){
+                    if(oPremSeats[i].status == 'mine'){
+                        ++numPremSeatsSelected;
+                        oPremSeats[i].src=statusPics['taken'].src
+                    }
+                }
+                numCheapSeatsSelected = 0;
+                for(i=0; i < oCheapSeats.length; i++){
+                    if(oCheapSeats[i].status == 'mine'){
+                        ++numCheapSeatsSelected;
+                        oCheapSeats[i].src=statusPics['taken'].src
+                    }
+                }
+                oBtnCheckout.disabled = (numPremSeatsSelected > 0 || numCheapSeatsSelected > 0)? false : true;
+            }
+            function checkout(){
+                var cheapSeatPrice = 5;
+                var premSeatPrice = 10;
+                var totPrice = (numPremSeatsSelected*premSeatPrice)+(numCheapSeatsSelected*cheapSeatPrice);
+                oTotalprice.innerHTML = totPrice;
+            }
+            window.onload=function(){        
+                oTblPremium = document.getElementById('tblPremium');
+                oTblCheap = document.getElementById('tblCheap');
+                //
+                oTblRegular = document.getElementById('tblRegular');
+                oPremSeats = oTblPremium.getElementsByTagName('img');
+                oCheapSeats = oTblCheap.getElementsByTagName('img');
+                //
+                oRegularSeats = oTblRegular.getElementsByTagName('img')
+                oBtnCheckout = document.getElementById('checkout');
+                oTotalprice = document.getElementById('totalprice');
+                oBtnCheckout.onclick=checkout;
+                createSeats(oTblPremium,numPremSeatsPerRow,PremRowNames); //create premium seats
+                createSeats(oTblCheap,numCheapSeatsPerRow,CheapRowNames);
+                createSeats(oTblRegular,numRegularSeatsPerRow,RegularRowNames);//create cheap seats
+                document.getElementById('confirm').onclick=confirmChoices;
+                document.getElementById('btnReset').onclick=function(){
+                    oTotalprice.innerHTML = '';
+                    oBtnCheckout.disabled = true;
+                    for(i=0; i < oPremSeats.length; i++){
+                        oPremSeats[i].src = statusPics['avail'].src;
+                        oPremSeats[i].status = 'avail';
+                    }
+                    for(i=0; i < oCheapSeats.length; i++){
+                        oCheapSeats[i].src = statusPics['avail'].src;
+                        oCheapSeats[i].status = 'avail';
+                    }
+                     for(i=0; i < oRegularSeats.length; i++){
+                        oRegularSeats[i].src = statusPics['avail'].src;
+                        oRegularSeats[i].status = 'avail';
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body id="top">
+        <div class="wrapper col1">
+  <div id="header" class="clear">
+    <div class="fl_left">
+      <h1><a href="index.html">Live Music Concert Hall Booking</a></h1>
+      <p>Get Ready for the fun!!</p>
+    </div>
+        <div class="fl_right">
+      <form action="#" method="post" id="search">
+        <fieldset>
+          <legend>Site Search</legend>
+          <input type="text" value="Search Our Website&hellip;" />
+          <input type="image" id="go" src="images/search.gif" alt="Search" />
+        </fieldset>
+      </form>
+      <ul id="topnav" class="clear">
+          <li><a href="help.html">HELP</a></li>
+        <li><a href="contactus.html">CONTACT US</a></li>
+        <li class="active"><a href="map.html">MAP</a></li>
+        <li><a href="aboutus.html">ABOUT US</a></li>
+        <li class="last"><a href="index.html">HOME</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+        <div id="header"></div>
+        <div id="wrapper">
+            <div id="myTickets">
+                <h1>My Tickets</h1>
+                <div id="myTicket">
+                    <h3>Your Seat Selection:</h3>
+                </div>
+                <div id="myPrice">
+                    <table>
+                        <tr>
+                            <td>Total Price: &pound</td>
+                            <td id="totalprice"></td>
+                        </tr></table>
+                </div>
+                <div id="key"><p><input type="button" id="checkout" value="Check Out" disabled="disabled" /></p>
+                    <p>&nbsp;&nbsp;<img src="images/seat_available.png" alt="Available" /> = Available; <img src="images/seat_selected.png" alt="Mine" /> = Mine;
+                        <img src="images/seat_reserved.png" alt="Taken" /> = Taken</p>
+                </div>
+            </div>
+            <div id="seating">
+                <center><img src="images/stage.png"></img></center>
+                <h4>Super Deluxe Seating</h4>
+                <center><table id="tblPremium"></table></center>
+                <h4>Deluxe Seating</h4>
+                <center><table id="tblCheap"></table></center>
+                <h4>Regular Seating</h4>
+                <center><table id="tblRegular"></table></center>
+                <h5></h5>
+                <h4>Standing Slot</h4>
+                <center><table id="tblStanding"></table></center>
+                <h5></h5>
+                <div style="clear:both">
+                </div>
+                <br />
+                <div id="theButtons">
+                    <center><input type="button" value="Confirm Choices" id="confirm" onclick="confirmChoices()" />&nbsp;</center>
+                    <input type="reset" id="btnReset" value="Reset" />
+                </div>
+            </div>
+        </div>
+        
+<div class="wrapper">
+  <div id="footer">
+    <div class="verticaline clear">
+      <div class="box size1">
+        <h2>Keep in Touch</h2>
+        <p id="rss"><a href="#"><img src="images/rss.gif" alt="" /></a></p>
+      </div>
+      <div class="box size2">
+        <address>
+        <strong class="title">Company Name</strong><br />
+        NWMSU Live Concert Hall Booking<br />
+        Maryville<br />
+        64468
+        </address>
+        <ul>
+          <li><strong class="title">Tel:</strong><br />
+            660.562.1145</li>
+          <li><strong class="title">Fax:</strong><br />
+           660.562.1146</li>
+          <li><strong class="title">Email:</strong><br />
+            <a href="#">livemusic@nwmsu.edu.in</a></li>
+        </ul>
+      </div>
+      <div class="box size3">
+        <ul>
+          <li><span>Facebook:</span> <a href="#">www.facebook.com/NwmsuLiveMusic</a></li>
+          <li><span>Twitter:</span> <a href="#">www.twitter.com/NwmsuLiveMusic</a></li>
+          <li><span>LinkedIn:</span> <a href="#">www.linkedin.com/NwmsuLiveMusic</a></li>
+        </ul>
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Newsletter Signup:</legend>
+            <input type="text" id="newsletter" value="Enter Email Here&hellip;" onfocus="this.value=(this.value=='Enter Email Here&hellip;')? '' : this.value ;" />
+            <input type="image" id="subscribe" src="images/submit.gif" alt="Submit" />
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>
