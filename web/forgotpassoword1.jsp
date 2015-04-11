@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="css/layout.css" type="text/css" />
     </head>
     <script>
-        
+        function verifysec(){}
         
     </script>
     <body id="top">
