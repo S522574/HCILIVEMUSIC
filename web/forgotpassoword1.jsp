@@ -1,3 +1,4 @@
+<%@page import="musicentities.RegistrationEntityy"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -6,8 +7,22 @@
         <link rel="stylesheet" href="css/layout.css" type="text/css" />
     </head>
     <script>
-        function verifysec(){}
-        
+        function verifysec() {
+            var userdetail = '${sessionScope.userdetails}';
+//            alert(userdetail.securityAnswer);
+            var answer = '${sessionScope.userdetails.securityAnswer}';
+//            alert(answer);
+            var givenans = document.getElementById("secanswer").value;
+//            alert(givenans);
+            if (answer != givenans){
+                alert("entered answer is wrond");
+//                document.getElementById("valid").value = "Entered answer is wrong";
+        document.security.action="forgotpassoword1.jsp";
+                }
+                else document.security.action="index.html";
+
+        }
+
     </script>
     <body id="top">
         <div class="wrapper col1">
@@ -39,16 +54,17 @@
             <div id="container" class="clear"> 
                 <div id="content">
                     <div id="respond">
-                        <form action="ForgotPassword" method="post">
+                        <form name="security">
                             <table>
                                 <tr><td></td><td>Answer security Question </td></tr>
-                                   <tr> <td>Who is your teacher:</td><td> <input type="text" name="emailid" id="emailId" value="" size="22" />
+                                <tr> <td><%= ((RegistrationEntityy) session.getAttribute("userdetails")).getSecurityQuestion()%></td><td> <input type="text" name="secanswer" id="secanswer" value="" size="22" />
+                                        <p id="valid"></p>
                                     </td></tr>
                                 <tr><td></td><td><input name="submit" onclick="verifysec()" type="submit" id="submit" value="Answer" /></td>
-                                    </tr>
+                                </tr>
                             </table>                             
-                          
-                           
+
+
                         </form>
                     </div>
                 </div>   

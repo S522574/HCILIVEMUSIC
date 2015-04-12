@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import musicentities.RegistrationEntityy;
 
 /**
@@ -44,6 +45,8 @@ public class ForgotPassword extends HttpServlet {
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 RegistrationEntityy e = (RegistrationEntityy) in.readObject();
                 request.setAttribute("userdetails", e);
+                HttpSession hs=request.getSession();
+                hs.setAttribute("userdetails", e);
                 in.close();
                 fileIn.close();
             } catch (Exception i) {

@@ -92,13 +92,15 @@ public class RegistrationServlet extends HttpServlet {
         try
       {
           
-          String uname="S522617@mail.nwmissouri.edu";
-         FileInputStream fileIn = new FileInputStream(uname+".ser");
+//          String uname="S522617@mail.nwmissouri.edu";
+         FileInputStream fileIn = new FileInputStream(email+".ser");
          ObjectInputStream in = new ObjectInputStream(fileIn);
          r = (RegistrationEntityy) in.readObject();
           System.out.println("***********"+r.getFirstName());
           System.out.println("***********"+r.getCity());
           System.out.println("***********"+r.getEmail());
+          System.out.println("***********"+r.getSecurityAnswer());
+          System.out.println("***********"+r.getSecurityQuestion());
 //          System.out.println("***********"+r.g);
           
          in.close();
